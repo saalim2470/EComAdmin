@@ -18,6 +18,7 @@ import Blank from "./pages/Blank";
 import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
+import CreateCategory from "./pages/CategoryPages/CreateCategory";
 
 export default function App() {
   return (
@@ -51,11 +52,16 @@ export default function App() {
             {/* Charts */}
             <Route path="/line-chart" element={<LineChart />} />
             <Route path="/bar-chart" element={<BarChart />} />
+
+            {/* category pages */}
+            <Route path="/createCategory" element={<CreateCategory />} />
           </Route>
 
           {/* Auth Layout */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+
+
 
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />

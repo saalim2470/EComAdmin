@@ -29,6 +29,8 @@ export default function SignInForm() {
     })
       .then(function (response) {
         console.log(response);
+        localStorage.setItem('token',response?.data?.data?.token);
+
         alert(response?.data?.msg || 'Login')
         navigate('/', { replace: true });
 
