@@ -8,6 +8,7 @@ import Switch from "../form/switch/Switch.tsx"
 import FileInput from "../form/input/FileInput.tsx"
 import Button from "../ui/button/Button.tsx"
 import axios from "axios"
+import FullPageLoader from "../common/FullPageLoader.jsx"
 
 export default function CategoryInputs() {
     const [isLoading, setIsLoading] = useState(false)
@@ -53,6 +54,12 @@ export default function CategoryInputs() {
             .then(function (response) {
                 console.log(response);
                 setIsLoading(false)
+                setCategoryData({
+                    name:'',
+                    description:'',
+                    isActive:true,
+                    image:''
+                })
                 alert('Category created successfuly')
 
             })
@@ -65,6 +72,7 @@ export default function CategoryInputs() {
 
     return (
         <ComponentCard title="Create Category">
+            {isLoading&&<FullPageLoader/>}
             <div className="space-y-6">
                 <div>
                     <Label htmlFor="name">Name</Label>

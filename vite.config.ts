@@ -15,4 +15,11 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    host: true,
+    port: 3000,
+    allowedHosts: [
+      "3970d72b-b2f0-4493-94db-8825e3a5facb-00-1usgrmzi7an3v.pike.replit.dev",
+    ],
+  },
 });
