@@ -142,20 +142,16 @@ export default function ViewCategory() {
                   <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">
                     {cat?.name}
                   </TableCell>
-                  {/* <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">
+                   <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">
                     <Badge
                       size="sm"
                       color={
-                        product.status === "Delivered"
-                          ? "success"
-                          : product.status === "Pending"
-                            ? "warning"
-                            : "error"
+                        cat?.isActive ? "success": "error"
                       }
                     >
-                      {product.status}
+                      {cat?.isActive?"Active":"Inactive"}
                     </Badge>
-                  </TableCell> */}
+                  </TableCell> 
                 </TableRow>
               ))}
             </TableBody>
