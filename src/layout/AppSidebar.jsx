@@ -79,7 +79,7 @@ const othersItems = [
     name: "Categories",
     subItems: [
       { name: "Create", path: "/createCategory", pro: false },
-      { name: "View", path: "/", pro: false }
+      { name: "View", path: "/viewCategory", pro: false }
     ]
   },
   {

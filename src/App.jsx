@@ -19,6 +19,7 @@ import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
 import CreateCategory from "./pages/CategoryPages/CreateCategory";
+import ViewCategory from "./pages/CategoryPages/ViewCategory";
 
 export default function App() {
   return (
@@ -55,6 +56,7 @@ export default function App() {
 
             {/* category pages */}
             <Route path="/createCategory" element={<CreateCategory />} />
+            <Route path="/viewCategory" element={<ViewCategory />} />
           </Route>
 
           {/* Auth Layout */}
