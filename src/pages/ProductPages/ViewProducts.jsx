@@ -134,7 +134,7 @@ export default function ViewProducts() {
             {/* Table Body */}
 
             <TableBody className="divide-y divide-gray-100 dark:divide-gray-800">
-              {products?.map((product) => (
+              {productsData?.map((product) => (
                 <TableRow key={product?.id?.toString()} className="">
                   <TableCell className="py-3">
                     <div className="flex items-center gap-3">
