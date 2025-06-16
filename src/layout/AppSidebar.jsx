@@ -83,6 +83,13 @@ const othersItems = [
     ]
   },
   {
+    icon: <PieChartIcon />,
+    name: "Products",
+    subItems: [
+      { name: "View", path: "/viewProducts", pro: false }
+    ]
+  },
+  {
     icon: <PlugInIcon />,
     name: "Authentication",
     subItems: [

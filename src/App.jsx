@@ -20,6 +20,7 @@ import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
 import CreateCategory from "./pages/CategoryPages/CreateCategory";
 import ViewCategory from "./pages/CategoryPages/ViewCategory";
+import ViewProducts from "./pages/ProductPages/ViewProducts";
 
 export default function App() {
   return (
@@ -57,7 +58,12 @@ export default function App() {
             {/* category pages */}
             <Route path="/createCategory" element={<CreateCategory />} />
             <Route path="/viewCategory" element={<ViewCategory />} />
+
+            {/* products pages */}
+            <Route path="/viewProducts" element={<ViewProducts />} />
           </Route>
+
+
 
           {/* Auth Layout */}
           <Route path="/signin" element={<SignIn />} />
