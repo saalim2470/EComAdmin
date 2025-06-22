@@ -42,6 +42,7 @@ export default function ProductInputs() {
     image: "",
     tags: [],
     tagsInput: "",
+    brand: "",
     variants: [
       {
         unit: "",
@@ -101,7 +102,6 @@ export default function ProductInputs() {
     const updatedVariants = [...productInputs.variants];
     updatedVariants[index] = {
       ...updatedVariants[index],
-      // fieldName==='unit'?[fieldName]: `value${}` :
       [fieldName]: value,
     };
     setproductInputs((prev) => ({
@@ -155,7 +155,6 @@ export default function ProductInputs() {
       });
   };
   const showTrashIcon = productInputs?.variants?.length > 1;
-  console.log("productInputs", productInputs);
 
   return (
     <ComponentCard title="Create Product">
@@ -186,59 +185,7 @@ export default function ProductInputs() {
               }}
             />
           </div>
-          <div>
-            <Label>Select Category</Label>
-            <Select
-              options={options}
-              placeholder="Select Category"
-              onChange={handleSelectChange}
-              className="dark:bg-dark-900"
-            />
-          </div>
-          <div>
-            <div className="flex items-center gap-5">
-              <div className="flex-1">
-                <Label htmlFor="name">Tags</Label>
-                <Input
-                  type="text"
-                  id="tagsInput"
-                  name="tagsInput"
-                  placeholder="Enter Tags"
-                  value={productInputs.tagsInput}
-                  onChange={(e) => {
-                    setInputData("tagsInput", e.target.value);
-                  }}
-                />
-              </div>
-              <div className="self-end">
-                <Button
-                  size="md"
-                  className="hover:bg-blue"
-                  variant="outline"
-                  onClick={addTags}
-                  // disabled={!productInputs.tagsInput}
-                  startIcon={<PlusIcon />}
-                />
-              </div>
-            </div>
-            <div className="flex flex-wrap gap-3 mt-3">
-              {productInputs?.tags.length > 0 &&
-                productInputs.tags.map((value, index) => (
-                  <BubbleChep
-                    key={index}
-                    value={value}
-                    onClick={() => removeTag(index)}
-                  />
-                ))}
-            </div>
-          </div>
-          <div>
-            <Label>Upload file</Label>
-            <FileInput onChange={handleFileChange} className="custom-class" />
-          </div>
-        </div>
 
-        <div className="space-y-6">
           <Label htmlFor="name">Variants</Label>
           {/* varient card */}
           {productInputs?.variants?.map((variant, index) => {
@@ -309,7 +256,7 @@ export default function ProductInputs() {
                       <Select
                         options={unitOptions}
                         placeholder="Select Unit"
-                        value={variant?.unitInput}
+                        defaultValue={variant?.unitInput}
                         onChange={(selectedOption) =>
                           handleSelectChange(selectedOption, index)
                         }
@@ -353,6 +300,72 @@ export default function ProductInputs() {
           >
             Add Variant
           </Button>
+        </div>
+
+        <div className="space-y-6">
+          <div>
+            <Label htmlFor="brand">Brand</Label>
+            <Input
+              type="text"
+              id="brand"
+              name="brand"
+              placeholder="Enter Brand"
+              value={productInputs.brand}
+              onChange={(e) => {
+                setInputData("brand", e.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <Label>Select Category</Label>
+            <Select
+              options={options}
+              placeholder="Select Category"
+              onChange={handleSelectChange}
+              className="dark:bg-dark-900"
+            />
+          </div>
+          <div>
+            <div className="flex items-center gap-5">
+              <div className="flex-1">
+                <Label htmlFor="name">Tags</Label>
+                <Input
+                  type="text"
+                  id="tagsInput"
+                  name="tagsInput"
+                  placeholder="Enter Tags"
+                  value={productInputs.tagsInput}
+                  onChange={(e) => {
+                    setInputData("tagsInput", e.target.value);
+                  }}
+                />
+              </div>
+              <div className="self-end">
+                <Button
+                  size="md"
+                  className="hover:bg-blue"
+                  variant="outline"
+                  onClick={addTags}
+                  // disabled={!productInputs.tagsInput}
+                  startIcon={<PlusIcon />}
+                />
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-3 mt-3">
+              {productInputs?.tags.length > 0 &&
+                productInputs.tags.map((value, index) => (
+                  <BubbleChep
+                    key={index}
+                    value={value}
+                    onClick={() => removeTag(index)}
+                  />
+                ))}
+            </div>
+          </div>
+          <div>
+            <Label>Upload file</Label>
+            <FileInput onChange={handleFileChange} className="custom-class" />
+          </div>
         </div>
       </div>
       <div className="w-full sm:self-center sm:w-2xs">
