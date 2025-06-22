@@ -86,7 +86,8 @@ const othersItems = [
     icon: <PieChartIcon />,
     name: "Products",
     subItems: [
-      { name: "View", path: "/viewProducts", pro: false }
+      { name: "View", path: "/viewProducts", pro: false },
+      { name: "Create", path: "/createProducts", pro: false }
     ]
   },
   {

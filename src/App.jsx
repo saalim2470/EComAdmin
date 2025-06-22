@@ -21,6 +21,7 @@ import Home from "./pages/Dashboard/Home";
 import CreateCategory from "./pages/CategoryPages/CreateCategory";
 import ViewCategory from "./pages/CategoryPages/ViewCategory";
 import ViewProducts from "./pages/ProductPages/ViewProducts";
+import CreateProducts from "./pages/ProductPages/CreateProducts";
 
 export default function App() {
   return (
@@ -61,6 +62,7 @@ export default function App() {
 
             {/* products pages */}
             <Route path="/viewProducts" element={<ViewProducts />} />
+            <Route path="/createProducts" element={<CreateProducts />} />
           </Route>
 
 
