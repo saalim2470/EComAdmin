@@ -18,6 +18,7 @@ import axios from "axios";
 import FullPageLoader from "../common/FullPageLoader.jsx";
 import Select from "../form/Select.tsx";
 import BubbleChep from "../common/BubbleChep.jsx";
+import { BeakerIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 export default function ProductInputs() {
   const options = [
@@ -54,7 +55,7 @@ export default function ProductInputs() {
   });
   const addTags = () => {
     if (productInputs.tagsInput.trim() === "") return;
-    setProductInputs((prev) => ({
+    setproductInputs((prev) => ({
       ...prev,
       tags: [...prev.tags, productInputs.tagsInput],
       tagsInput: "",
@@ -65,6 +66,13 @@ export default function ProductInputs() {
     const newTags = tags.filter((_, index1) => index1 !== index);
     setproductInputs((prev) => {
       return { ...prev, tags: newTags };
+    });
+  };
+  const removeVariants = (index) => {
+    const variants = [...productInputs.variants];
+    const newVariants = variants.filter((_, index1) => index1 !== index);
+    setproductInputs((prev) => {
+      return { ...prev, variants: newVariants };
     });
   };
   const addVariants = () => {
@@ -93,6 +101,7 @@ export default function ProductInputs() {
     const updatedVariants = [...productInputs.variants];
     updatedVariants[index] = {
       ...updatedVariants[index],
+      // fieldName==='unit'?[fieldName]: `value${}` :
       [fieldName]: value,
     };
     setproductInputs((prev) => ({
@@ -145,6 +154,7 @@ export default function ProductInputs() {
         console.log(error);
       });
   };
+  const showTrashIcon = productInputs?.variants?.length > 1;
   console.log("productInputs", productInputs);
 
   return (
@@ -206,7 +216,7 @@ export default function ProductInputs() {
                   className="hover:bg-blue"
                   variant="outline"
                   onClick={addTags}
-                  disabled={!productInputs.tagsInput}
+                  // disabled={!productInputs.tagsInput}
                   startIcon={<PlusIcon />}
                 />
               </div>
@@ -226,17 +236,6 @@ export default function ProductInputs() {
             <Label>Upload file</Label>
             <FileInput onChange={handleFileChange} className="custom-class" />
           </div>
-          <div className="hidden sm:block">
-            <Button
-              disabled={isLoading}
-              size="md"
-              variant="primary"
-              className="w-2xs"
-              //onClick={onSubmit}
-            >
-              Create
-            </Button>
-          </div>
         </div>
 
         <div className="space-y-6">
@@ -248,6 +247,15 @@ export default function ProductInputs() {
                 key={index}
                 className="w-auto p-6 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700"
               >
+                {/* bin icon */}
+                <div className="flex justify-end">
+                  {showTrashIcon && (
+                    <TrashIcon
+                      className="size-6 text-red-400 hover:text-red-700 cursor-pointer"
+                      onClick={() => removeVariants(index)}
+                    />
+                  )}
+                </div>
                 <div className="grid grid-cols-2 gap-3 xl:grid-cols-2">
                   <div className="space-y-6">
                     <div>
@@ -347,7 +355,7 @@ export default function ProductInputs() {
           </Button>
         </div>
       </div>
-      <div className="sm:hidden">
+      <div className="w-full sm:self-center sm:w-2xs">
         <Button
           disabled={isLoading}
           size="md"
