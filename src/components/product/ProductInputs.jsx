@@ -43,6 +43,7 @@ export default function ProductInputs() {
     tags: [],
     tagsInput: "",
     brand: "",
+    categoryId:"",
     variants: [
       {
         unit: "",
@@ -54,6 +55,7 @@ export default function ProductInputs() {
       },
     ],
   });
+  const [categoryData, setCategoryData] = useState([]);
   const addTags = () => {
     if (productInputs.tagsInput.trim() === "") return;
     setproductInputs((prev) => ({
@@ -112,6 +114,9 @@ export default function ProductInputs() {
   const handleSelectChange = (selectedOption, index) => {
     setvarients(index, "unitInput", selectedOption);
   };
+  const handleCategoryChange = (selectedOption) => {
+    setInputData("categoryId", selectedOption);
+  }
 
   const handleFileChange = (event) => {
     const file = event.target.files?.[0];
@@ -155,7 +160,33 @@ export default function ProductInputs() {
       });
   };
   const showTrashIcon = productInputs?.variants?.length > 1;
+const getCategoryData=()=>{
+      const token = localStorage.getItem("token");
+      axios
+        .get(
+`${import.meta.env.VITE_API_URL}/api/category/getAll?page=1&limit=30`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        )
+        .then(function (response) {
+          return response.data?.data
+        })
+        .catch(function (error) {
+          alert(error.response?.data?.msg || "some error occured");
+          setIsLoading(false);
+          console.log(error);
+        });
+}
 
+  useEffect(()=>{
+    setIsLoading(true)
+    const data=getCategoryData()
+    setCategoryData(data)
+  },[])
   return (
     <ComponentCard title="Create Product">
       {isLoading && <FullPageLoader />}
@@ -319,9 +350,11 @@ export default function ProductInputs() {
           <div>
             <Label>Select Category</Label>
             <Select
-              options={options}
+              valueKey="id"
+              labelKey="name"
+              options={categoryData}
               placeholder="Select Category"
-              onChange={handleSelectChange}
+              onChange={handleCategoryChange}
               className="dark:bg-dark-900"
             />
           </div>
