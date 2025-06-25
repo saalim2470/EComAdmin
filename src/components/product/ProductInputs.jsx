@@ -160,33 +160,32 @@ export default function ProductInputs() {
       });
   };
   const showTrashIcon = productInputs?.variants?.length > 1;
-const getCategoryData=()=>{
-      const token = localStorage.getItem("token");
-      axios
-        .get(
-`${import.meta.env.VITE_API_URL}/api/category/getAll?page=1&limit=30`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        )
-        .then(function (response) {
-          return response.data?.data
-        })
-        .catch(function (error) {
-          alert(error.response?.data?.msg || "some error occured");
-          setIsLoading(false);
-          console.log(error);
-        });
-}
+const getCategoryData = () => {
+  const token = localStorage.getItem("token");
+  axios
+    .get(`${import.meta.env.VITE_API_URL}/api/category/getAll?page=1&limit=30`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(function (response) {
+      setCategoryData(response.data?.data || []); // 👈 set the state here
+      setIsLoading(false);
+    })
+    .catch(function (error) {
+      alert(error.response?.data?.msg || "Some error occurred");
+      setIsLoading(false);
+      console.error(error);
+    });
+};
 
-  useEffect(()=>{
-    setIsLoading(true)
-    const data=getCategoryData()
-    setCategoryData(data)
-  },[])
+useEffect(() => {
+  setIsLoading(true);
+  getCategoryData(); // no need to assign return
+}, []);
+  
+
   return (
     <ComponentCard title="Create Product">
       {isLoading && <FullPageLoader />}
